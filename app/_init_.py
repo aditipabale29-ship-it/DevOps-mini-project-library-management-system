@@ -1,8 +1,12 @@
 from flask import Flask, jsonify
 
+from app.routes.api import api
+
 
 def create_app():
     app = Flask(__name__)
+
+    app.register_blueprint(api)
 
     @app.route("/")
     def home():
@@ -10,9 +14,5 @@ def create_app():
             "message": "Library Management System",
             "status": "running"
         })
-
-    @app.route("/api/health")
-    def health():
-        return jsonify({"status": "healthy"}), 200
 
     return app
